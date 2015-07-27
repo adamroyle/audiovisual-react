@@ -44,15 +44,14 @@ export default class Visualisation extends Component {
 
   createInstances() {
     Children.forEach(this.props.children, (effect) => {
-      if (!effect.key) {
+      const key = effect.key;
+      if (!key) {
         console.warn('Key not found for effect');
         return;
       }
-      if (!this._objects[effect.key]) {
-        this._objects[effect.key] = new effect.type();
-        if (this._objects[effect.key].didMount) {
-          this._objects[effect.key].didMount(); 
-        }
+      if (!this._objects[key]) {
+        const instance = new effect.type();
+        this._objects[key] = instance;
       }
     });
   }
