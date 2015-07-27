@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var fs = require('fs');
 
 module.exports = {
   devtool: 'eval',
@@ -8,6 +9,9 @@ module.exports = {
     'webpack/hot/only-dev-server',
     './src/index'
   ],
+  node: {
+    fs: 'empty'
+  },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -22,6 +26,17 @@ module.exports = {
   },
   module: {
     loaders: [{
+      test: /\.js$/,
+      include: path.join(__dirname, 'node_modules', 'pixi.js'),
+      loader: 'transform?brfs',
+    },{
+      test: /\.json$/,
+      include: path.join(__dirname, 'node_modules', 'pixi.js'),
+      loader: 'json',
+    },{
+      test: /\.glsl$/,
+      loader: 'webpack-glsl'
+    },{
       test: /\.jsx?$/,
       loaders: ['react-hot', 'babel'],
       include: path.join(__dirname, 'src')
