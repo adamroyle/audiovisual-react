@@ -47,15 +47,6 @@ export default class RainEffect {
 		];
 	}
 
-	/*getEffectRequirements() {
-		return {
-			outline: false,
-			audio: false,
-			kinect: true,
-			palette: true
-		};
-	}*/
-
 	constructor() {
 		this.droplets = [];
 	}
