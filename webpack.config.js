@@ -37,6 +37,10 @@ module.exports = {
       test: /\.glsl$/,
       loader: 'webpack-glsl'
     },{
+      test: /\.(jpg|png)?$/,
+      loader: 'url-loader',
+      include: path.join(__dirname, 'src')
+    },{
       test: /\.jsx?$/,
       loaders: ['react-hot', 'babel'],
       include: path.join(__dirname, 'src')

@@ -9,6 +9,7 @@ import BlurFilter from './filters/BlurFilter';
 import TwistFilter from './filters/TwistFilter';
 import PixelateFilter from './filters/PixelateFilter';
 import KaleidoscopeFilter from './filters/KaleidoscopeFilter';
+import DisplacementFilter from './filters/DisplacementFilter';
 
 export default class App extends Component {
   constructor() {
@@ -30,6 +31,7 @@ export default class App extends Component {
       speed: 0.2,
       gapThickness: 10,
       kaleidoscopeSides: 5,
+      displacementScale: 0,
     };
   }
   handleSliderChange(name, event) {
@@ -51,13 +53,13 @@ export default class App extends Component {
     return (
       <div>
         <Visualisation onDrawLine={this.handleDrawLine.bind(this)} onDrawShape={this.handleDrawShape.bind(this)} ref="canvas" key={'vis1_' + this.state.key} width={320 * 2} height={240 * 2}>
-          <RainEffect key="cmp67"
+          {/*<RainEffect key="cmp67"
             lineThickness={this.state.lineThickness}
             gravity={this.state.gravity}
             wind={this.state.wind}
             windVariation={this.state.windVariation}
             lineLength={20}
-            avoid={this.state.shapePoints} />
+            avoid={this.state.shapePoints} />*/}
           <ShapeEffect key="cmp98" color="#FFFFFF" alpha={this.state.shapeAlpha} points={this.state.shapePoints} />
           <LineEffect key="cmp99" color="#FFFFFF" lineThickness={this.state.lineThickness} alpha={this.state.shapeAlpha} points={this.state.linePoints} />
           <BlurFilter key="cmp70" blur={this.state.blur} />
@@ -65,6 +67,7 @@ export default class App extends Component {
           <PixelateFilter key="cmp90" size={this.state.pixelate} />
           <RGBSplitFilter key="cmp68" distance={this.state.rgbSplit} />
           <KaleidoscopeFilter key="cmp61" sides={this.state.kaleidoscopeSides} />
+          <DisplacementFilter key="cmp89" scale={this.state.displacementScale} />
           
           <BarbershopEffect key="cmp23"
             lineThickness={this.state.lineThickness}
@@ -79,6 +82,8 @@ export default class App extends Component {
           <BlurFilter key="cmp56"
             amount={10}          />*/}
         </Visualisation>
+        <label style={styles.sliderLabel}>Displacement</label>
+        <input type="range" min="0" max="1000" step="10" value={this.state.displacementScale} onChange={this.handleSliderChange.bind(this, 'displacementScale')} />
         <label style={styles.sliderLabel}>Line Thickness</label>
         <input type="range" min="1" max="30" value={this.state.lineThickness} onChange={this.handleSliderChange.bind(this, 'lineThickness')} />
         <label style={styles.sliderLabel}>Gap Thickness</label>
